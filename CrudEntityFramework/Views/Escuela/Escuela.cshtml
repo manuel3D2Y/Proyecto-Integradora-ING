@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Escuela";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    @*<script src="~/Scripts/js/Escuela.js"></script>*@
+    <link href="~/Content/estilos.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="height: 410px" role="document">
+            <div class="modal-content" style="height: 410px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Actualizar</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row margen">
+                        <label class="col-md-3">Calificación 1 </label>
+                        <div class="col-md-3">
+                            <input onchange="calcularPromedioModal()" class="form-control" type="text" id="Calificacion1" />
+                        </div>
+                    </div>
+                    <div class="row margen">
+                        <label class="col-md-3">Calificación 2 </label>
+                        <div class="col-md-3">
+                            <input onchange="calcularPromedioModal()" class="form-control" type="text" id="Calificacion2" />
+                        </div>
+                    </div>
+                    <div class="row margen">
+                        <label class="col-md-3">Calificación 3 </label>
+                        <div class="col-md-3">
+                            <input onchange="calcularPromedioModal()" class="form-control" type="text" id="Calificacion3" />
+                        </div>
+                    </div>
+                    <div class="row margen">
+                        <label class="col-md-3">Calificación 4 </label>
+                        <div class="col-md-3">
+                            <input onchange="calcularPromedioModal()" class="form-control" type="text" id="Calificacion4" />
+                        </div>
+                    </div>
+                    <div class="row margen">
+                        <label class="col-md-3">Calificación Final </label>
+                        <div class="col-md-3">
+                            <input class="col-md-1 form-control" type="text" id="CalificacionFinal" readonly />
+                        </div>
+                    </div>
+                    <div class="row margen">
+                        <label class="col-md-2">Año </label>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" id="Anio" placeholder="Año" />
+                        </div>
+                        <label class="col-md-2">Periodo </label>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" id="Periodo" placeholder="Periodo" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button type="button" id="btnActualizar" onclick="actualizar()" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="separacion-padding">
+        <div class="topnav">
+            <a class="active" href="/PaginaPrincipal/PaginaPrincipal">Nosotros</a>
+            <a href="/ConsultaReporte/GestionReporte">Usuarios</a>
+            <a href="/ConsultaReporte/ActualizarBase">Promociones</a>
+            <a href="/ConsultaReporte/ActualizarBase">Notificaciones</a>
+            <a href="#">Reservaciones</a>
+            <a href="/ConsultaReporte/ActualizarBase">Contacto</a>
+            <a href="/ConsultaReporte/ActualizarBase">Salir</a>
+        </div>
+        <div class="row">
+            <img src="~/Content/Imagenes/utng.jpg" class="col-md-4">
+            <div class="col-md-5 text-right align-self-center estilo-fecha" style="vertical-align:middle;" id="fechaHoy"></div>
+        </div>
+        <h3 class="bg-info text-white negrita">Reservaciones</h3>
+        <div class="container margen-amplio">
+            <div class="row margen">
+                <label class="col-md-1">Alumno </label>
+                <select class="form-control" id="selecAlumno" onchange="refrescarTodo()">
+                    <option value="default" selected="selected">--Nombre Alumno--</option>
+                </select>
+                <label class="col-md-1">Materia </label>
+                <select class="form-control" id="selecMateria" onchange="refrescarTodo()">
+                    <option value="default" selected="selected">--Nombre de la materia--</option>
+                </select>
+            </div>
+            <div class="row margen">
+                <label class="col-md-1">Calificación 1 </label>
+                <div class="col-md-1">
+                    <input onchange="calcularPromedio()" class="form-control" type="text" id="txtCalificacion1" />
+                </div>
+                <label class="col-md-1">Calificación 2 </label>
+                <div class="col-md-1">
+                    <input onchange="calcularPromedio()" class="form-control" type="text" id="txtCalificacion2" />
+                </div>
+                <label class="col-md-1">Calificación 3 </label>
+                <div class="col-md-1">
+                    <input onchange="calcularPromedio()" class="form-control" type="text" id="txtCalificacion3" />
+                </div>
+                <label class="col-md-1">Calificación 4 </label>
+                <div class="col-md-1">
+                    <input onchange="calcularPromedio()" class="form-control" type="text" id="txtCalificacion4" />
+                </div>
+                <label class="col-md-1">Calificación Final </label>
+                <div class="col-md-1">
+                    <input onchange="calcularPromedio()" class="col-md-1 form-control" type="text" id="txtCalificacionFinal" readonly />
+                </div>
+
+            </div>
+            <div class="row margen">
+                <label class="col-md-2">Año </label>
+                <div class="col-md-2">
+                    <input class="form-control" type="text" id="txtAnio" placeholder="Año" />
+                </div>
+                <label class="col-md-2">Periodo </label>
+                <div class="col-md-2">
+                    <input class="form-control" type="text" id="txtPeriodo" placeholder="Periodo" />
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="btnAgregarCalificacion" onclick="agregar()" class="btn btn-primary">Agregar</button>
+            </div>
+            <table id="tblCalificaiones" class="table table-responsive">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Alumno</th>
+                        <th>Carrera</th>
+                        <th>Materia</th>
+                        <th>Calificación 1</th>
+                        <th>Calificación 2</th>
+                        <th>Calificación 3</th>
+                        <th>Calificación 4</th>
+                        <th>Calificación Final</th>
+                        <th>Año</th>
+                        <th>Periodo</th>
+                        <th>Eliminar</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Reservaciones</p>
+        </footer>
+    </div>
+</body>
+</html>

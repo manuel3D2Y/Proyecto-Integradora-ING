@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EscuelaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alumno">
+          <Key>
+            <PropertyRef Name="Id_A" />
+          </Key>
+          <Property Name="Id_A" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_alum" Type="char" MaxLength="20" />
+          <Property Name="App_Alum" Type="char" MaxLength="20" />
+          <Property Name="Apm_Alum" Type="char" MaxLength="20" />
+          <Property Name="edad_alum" Type="smallint" />
+          <Property Name="sexo_alum" Type="char" MaxLength="1" />
+          <Property Name="ID_c" Type="smallint" />
+          <Property Name="id_gpo" Type="smallint" />
+          <Property Name="fec_nac" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CalificacionAlumno">
+          <Key>
+            <PropertyRef Name="miClave" />
+          </Key>
+          <Property Name="miClave" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_A" Type="smallint" />
+          <Property Name="ID_M" Type="smallint" />
+          <Property Name="calif_1" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="calif_2" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="calif_3" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="calif_4" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="calif_f" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ano" Type="smallint" />
+          <Property Name="Periodo" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="ID_c" />
+          </Key>
+          <Property Name="ID_c" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_carrera" Type="char" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id_gpo" />
+          </Key>
+          <Property Name="id_gpo" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_gpo" Type="char" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="ID_M" />
+          </Key>
+          <Property Name="ID_M" Type="smallint" Nullable="false" />
+          <Property Name="Nombre_Materia" Type="char" MaxLength="35" />
+          <Property Name="id_c" Type="smallint" />
+          <Property Name="cuatrimestre" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="profesor">
+          <Key>
+            <PropertyRef Name="Id_p" />
+          </Key>
+          <Property Name="Id_p" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_prof" Type="char" MaxLength="20" />
+          <Property Name="app_prof" Type="char" MaxLength="20" />
+          <Property Name="apm_prof" Type="char" MaxLength="20" />
+          <Property Name="edad_prof" Type="tinyint" />
+          <Property Name="sexo_prof" Type="char" MaxLength="1" />
+          <Property Name="Id_jefe" Type="smallint" />
+          <Property Name="id_c" Type="smallint" />
+        </EntityType>
+        <Association Name="alumno_ID_c_FK">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
+          <End Role="alumno" Type="Self.alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="alumno">
+              <PropertyRef Name="ID_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alumno_ID_gpo_FK">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="0..1" />
+          <End Role="alumno" Type="Self.alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id_gpo" />
+            </Principal>
+            <Dependent Role="alumno">
+              <PropertyRef Name="id_gpo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_id_c_Fk">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profesor_id_c_FK">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
+          <End Role="profesor" Type="Self.profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="profesor">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profesor_Id_jefe_FK">
+          <End Role="profesor" Type="Self.profesor" Multiplicity="0..1" />
+          <End Role="profesor1" Type="Self.profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesor">
+              <PropertyRef Name="Id_p" />
+            </Principal>
+            <Dependent Role="profesor1">
+              <PropertyRef Name="Id_jefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EscuelaModelStoreContainer">
+          <EntitySet Name="alumno" EntityType="Self.alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalificacionAlumno" EntityType="Self.CalificacionAlumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profesor" EntityType="Self.profesor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="alumno_ID_c_FK" Association="Self.alumno_ID_c_FK">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="alumno" EntitySet="alumno" />
+          </AssociationSet>
+          <AssociationSet Name="alumno_ID_gpo_FK" Association="Self.alumno_ID_gpo_FK">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="alumno" EntitySet="alumno" />
+          </AssociationSet>
+          <AssociationSet Name="materia_id_c_Fk" Association="Self.materia_id_c_Fk">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="profesor_id_c_FK" Association="Self.profesor_id_c_FK">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="profesor" EntitySet="profesor" />
+          </AssociationSet>
+          <AssociationSet Name="profesor_Id_jefe_FK" Association="Self.profesor_Id_jefe_FK">
+            <End Role="profesor" EntitySet="profesor" />
+            <End Role="profesor1" EntitySet="profesor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EscuelaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EscuelaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alumno" EntityType="EscuelaModel.alumno" />
+          <EntitySet Name="Carrera" EntityType="EscuelaModel.Carrera" />
+          <EntitySet Name="grupo" EntityType="EscuelaModel.grupo" />
+          <EntitySet Name="Materia" EntityType="EscuelaModel.Materia" />
+          <EntitySet Name="profesor" EntityType="EscuelaModel.profesor" />
+          <AssociationSet Name="alumno_ID_c_FK" Association="EscuelaModel.alumno_ID_c_FK">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="alumno" EntitySet="alumno" />
+          </AssociationSet>
+          <AssociationSet Name="alumno_ID_gpo_FK" Association="EscuelaModel.alumno_ID_gpo_FK">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="alumno" EntitySet="alumno" />
+          </AssociationSet>
+          <AssociationSet Name="materia_id_c_Fk" Association="EscuelaModel.materia_id_c_Fk">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="profesor_id_c_FK" Association="EscuelaModel.profesor_id_c_FK">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="profesor" EntitySet="profesor" />
+          </AssociationSet>
+          <AssociationSet Name="profesor_Id_jefe_FK" Association="EscuelaModel.profesor_Id_jefe_FK">
+            <End Role="profesor" EntitySet="profesor" />
+            <End Role="profesor1" EntitySet="profesor" />
+          </AssociationSet>
+          <EntitySet Name="CalificacionAlumno" EntityType="EscuelaModel.CalificacionAlumno" />
+        </EntityContainer>
+        <EntityType Name="alumno">
+          <Key>
+            <PropertyRef Name="Id_A" />
+          </Key>
+          <Property Name="Id_A" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_alum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="App_Alum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Apm_Alum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="edad_alum" Type="Int16" />
+          <Property Name="sexo_alum" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ID_c" Type="Int16" />
+          <Property Name="id_gpo" Type="Int16" />
+          <Property Name="fec_nac" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Carrera" Relationship="EscuelaModel.alumno_ID_c_FK" FromRole="alumno" ToRole="Carrera" />
+          <NavigationProperty Name="grupo" Relationship="EscuelaModel.alumno_ID_gpo_FK" FromRole="alumno" ToRole="grupo" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="ID_c" />
+          </Key>
+          <Property Name="ID_c" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_carrera" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="alumno" Relationship="EscuelaModel.alumno_ID_c_FK" FromRole="Carrera" ToRole="alumno" />
+          <NavigationProperty Name="Materia" Relationship="EscuelaModel.materia_id_c_Fk" FromRole="Carrera" ToRole="Materia" />
+          <NavigationProperty Name="profesor" Relationship="EscuelaModel.profesor_id_c_FK" FromRole="Carrera" ToRole="profesor" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id_gpo" />
+          </Key>
+          <Property Name="id_gpo" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_gpo" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="alumno" Relationship="EscuelaModel.alumno_ID_gpo_FK" FromRole="grupo" ToRole="alumno" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="ID_M" />
+          </Key>
+          <Property Name="ID_M" Type="Int16" Nullable="false" />
+          <Property Name="Nombre_Materia" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
+          <Property Name="id_c" Type="Int16" />
+          <Property Name="cuatrimestre" Type="Byte" />
+          <NavigationProperty Name="Carrera" Relationship="EscuelaModel.materia_id_c_Fk" FromRole="Materia" ToRole="Carrera" />
+        </EntityType>
+        <EntityType Name="profesor">
+          <Key>
+            <PropertyRef Name="Id_p" />
+          </Key>
+          <Property Name="Id_p" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_prof" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="app_prof" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="apm_prof" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="edad_prof" Type="Byte" />
+          <Property Name="sexo_prof" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Id_jefe" Type="Int16" />
+          <Property Name="id_c" Type="Int16" />
+          <NavigationProperty Name="Carrera" Relationship="EscuelaModel.profesor_id_c_FK" FromRole="profesor" ToRole="Carrera" />
+          <NavigationProperty Name="profesor1" Relationship="EscuelaModel.profesor_Id_jefe_FK" FromRole="profesor" ToRole="profesor1" />
+          <NavigationProperty Name="profesor2" Relationship="EscuelaModel.profesor_Id_jefe_FK" FromRole="profesor1" ToRole="profesor" />
+        </EntityType>
+        <Association Name="alumno_ID_c_FK">
+          <End Type="EscuelaModel.Carrera" Role="Carrera" Multiplicity="0..1" />
+          <End Type="EscuelaModel.alumno" Role="alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="alumno">
+              <PropertyRef Name="ID_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alumno_ID_gpo_FK">
+          <End Type="EscuelaModel.grupo" Role="grupo" Multiplicity="0..1" />
+          <End Type="EscuelaModel.alumno" Role="alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id_gpo" />
+            </Principal>
+            <Dependent Role="alumno">
+              <PropertyRef Name="id_gpo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_id_c_Fk">
+          <End Type="EscuelaModel.Carrera" Role="Carrera" Multiplicity="0..1" />
+          <End Type="EscuelaModel.Materia" Role="Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profesor_id_c_FK">
+          <End Type="EscuelaModel.Carrera" Role="Carrera" Multiplicity="0..1" />
+          <End Type="EscuelaModel.profesor" Role="profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="ID_c" />
+            </Principal>
+            <Dependent Role="profesor">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profesor_Id_jefe_FK">
+          <End Type="EscuelaModel.profesor" Role="profesor" Multiplicity="0..1" />
+          <End Type="EscuelaModel.profesor" Role="profesor1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesor">
+              <PropertyRef Name="Id_p" />
+            </Principal>
+            <Dependent Role="profesor1">
+              <PropertyRef Name="Id_jefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CalificacionAlumno">
+          <Key>
+            <PropertyRef Name="miClave" />
+          </Key>
+          <Property Name="miClave" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_A" Type="Int16" />
+          <Property Name="ID_M" Type="Int16" />
+          <Property Name="calif_1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="calif_2" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="calif_3" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="calif_4" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="calif_f" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ano" Type="Int16" />
+          <Property Name="Periodo" Type="Byte" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscuelaModelStoreContainer" CdmEntityContainer="EscuelaEntities">
+          <EntitySetMapping Name="alumno">
+            <EntityTypeMapping TypeName="EscuelaModel.alumno">
+              <MappingFragment StoreEntitySet="alumno">
+                <ScalarProperty Name="fec_nac" ColumnName="fec_nac" />
+                <ScalarProperty Name="id_gpo" ColumnName="id_gpo" />
+                <ScalarProperty Name="ID_c" ColumnName="ID_c" />
+                <ScalarProperty Name="sexo_alum" ColumnName="sexo_alum" />
+                <ScalarProperty Name="edad_alum" ColumnName="edad_alum" />
+                <ScalarProperty Name="Apm_Alum" ColumnName="Apm_Alum" />
+                <ScalarProperty Name="App_Alum" ColumnName="App_Alum" />
+                <ScalarProperty Name="Nombre_alum" ColumnName="Nombre_alum" />
+                <ScalarProperty Name="Id_A" ColumnName="Id_A" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="EscuelaModel.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="Nombre_carrera" ColumnName="Nombre_carrera" />
+                <ScalarProperty Name="ID_c" ColumnName="ID_c" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupo">
+            <EntityTypeMapping TypeName="EscuelaModel.grupo">
+              <MappingFragment StoreEntitySet="grupo">
+                <ScalarProperty Name="Nombre_gpo" ColumnName="Nombre_gpo" />
+                <ScalarProperty Name="id_gpo" ColumnName="id_gpo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia">
+            <EntityTypeMapping TypeName="EscuelaModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="cuatrimestre" ColumnName="cuatrimestre" />
+                <ScalarProperty Name="id_c" ColumnName="id_c" />
+                <ScalarProperty Name="Nombre_Materia" ColumnName="Nombre_Materia" />
+                <ScalarProperty Name="ID_M" ColumnName="ID_M" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profesor">
+            <EntityTypeMapping TypeName="EscuelaModel.profesor">
+              <MappingFragment StoreEntitySet="profesor">
+                <ScalarProperty Name="id_c" ColumnName="id_c" />
+                <ScalarProperty Name="Id_jefe" ColumnName="Id_jefe" />
+                <ScalarProperty Name="sexo_prof" ColumnName="sexo_prof" />
+                <ScalarProperty Name="edad_prof" ColumnName="edad_prof" />
+                <ScalarProperty Name="apm_prof" ColumnName="apm_prof" />
+                <ScalarProperty Name="app_prof" ColumnName="app_prof" />
+                <ScalarProperty Name="nombre_prof" ColumnName="nombre_prof" />
+                <ScalarProperty Name="Id_p" ColumnName="Id_p" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalificacionAlumno">
+            <EntityTypeMapping TypeName="EscuelaModel.CalificacionAlumno">
+              <MappingFragment StoreEntitySet="CalificacionAlumno">
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="ano" ColumnName="ano" />
+                <ScalarProperty Name="calif_f" ColumnName="calif_f" />
+                <ScalarProperty Name="calif_4" ColumnName="calif_4" />
+                <ScalarProperty Name="calif_3" ColumnName="calif_3" />
+                <ScalarProperty Name="calif_2" ColumnName="calif_2" />
+                <ScalarProperty Name="calif_1" ColumnName="calif_1" />
+                <ScalarProperty Name="ID_M" ColumnName="ID_M" />
+                <ScalarProperty Name="Id_A" ColumnName="Id_A" />
+                <ScalarProperty Name="miClave" ColumnName="miClave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

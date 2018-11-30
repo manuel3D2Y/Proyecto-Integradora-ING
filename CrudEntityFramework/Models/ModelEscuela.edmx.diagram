@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="539851aee386409c8626b4a8e18894ca" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="EscuelaModel.alumno" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="EscuelaModel.Carrera" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="EscuelaModel.grupo" Width="1.5" PointX="3.75" PointY="6.375" />
+        <EntityTypeShape EntityType="EscuelaModel.Materia" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="EscuelaModel.profesor" Width="1.5" PointX="1.625" PointY="7.5" />
+        <AssociationConnector Association="EscuelaModel.alumno_ID_c_FK" />
+        <AssociationConnector Association="EscuelaModel.alumno_ID_gpo_FK" />
+        <AssociationConnector Association="EscuelaModel.materia_id_c_Fk" />
+        <AssociationConnector Association="EscuelaModel.profesor_id_c_FK" />
+        <AssociationConnector Association="EscuelaModel.profesor_Id_jefe_FK" />
+        <EntityTypeShape EntityType="EscuelaModel.CalificacionAlumno" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+      <Diagram DiagramId="cdec2cf78e364ff3b76a38f5a308113e" Name="Diagram2" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

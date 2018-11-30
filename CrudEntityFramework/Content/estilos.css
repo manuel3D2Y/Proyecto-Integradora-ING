@@ -1,0 +1,100 @@
+﻿.no-valido {
+    border-color: #dc3545 !important;
+}
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('../Scripts/css/images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+
+.columna {
+    width:50% !important;
+    float:left !important;
+}
+
+.tamañoGraficas {
+    height: 300px !important;
+    width: 566px !important;
+}
+
+@media (max-width: 500px) {
+  
+    .columna {
+        width:auto !important;
+        float:none !important;
+    }
+  
+}
+.ocultar {
+    display: none;
+}
+
+.posicion-boton {
+    margin-top: 160px;
+}
+
+.tamanio-boton {
+    font-size: 50px
+}
+
+.estilo-fecha {
+    font-family: cursive;
+    font-weight: bold;
+}
+
+.separacion-padding {
+    padding: 3%;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.margen {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.margen-amplio {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.text-centrado {
+    text-align: center;
+}
+
+.etiqueta-casos-prueba {
+    max-width: 21%; 
+    flex: 21%; 
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #17a2b8;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #b0e0e6;
+    color: #17a2b8;
+}
+
+.topnav a.active {
+    background-color: #007bff;
+    color: white;
+}body {
+}
